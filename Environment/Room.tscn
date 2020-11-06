@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Environment/Room.gd" type="Script" id=1]
+[ext_resource path="res://Managers/Camera.tscn" type="PackedScene" id=2]
+
+[node name="Room" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="Camera" parent="." instance=ExtResource( 2 )]
+
+[node name="Floor" type="Sprite" parent="."]
+z_index = -1000
+region_enabled = true
+
+[node name="Objects" type="YSort" parent="."]
+
+[node name="Background" type="Sprite" parent="Objects"]
+z_index = -500
+
+[node name="Foreground" type="Sprite" parent="Objects"]
+z_index = 500
+
+[node name="Items" type="YSort" parent="Objects"]
+
+[node name="Decorations" type="YSort" parent="Objects"]
+
+[node name="Buildings" type="YSort" parent="Objects"]
+
+[node name="Characters" type="YSort" parent="Objects"]
+
+[node name="TransferPoints" type="Node2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

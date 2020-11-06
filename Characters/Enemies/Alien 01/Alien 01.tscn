@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Sprites/Characters/Enemies/Alien 01/sprite_enemy_alien_01_leg_left.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Characters/Enemies/Alien 01/sprite_enemy_alien_01_head.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Characters/Enemies/Alien 01/sprite_enemy_alien_01_arm_right.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Characters/Enemies/Alien 01/sprite_enemy_alien_01_arm_left.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Characters/Enemies/Alien 01/sprite_enemy_alien_01_leg_right.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Characters/Enemies/Alien 01/sprite_enemy_alien_01_torso.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Characters/Shadows/sprite_enemy_shadow_small.png" type="Texture" id=7]
+[ext_resource path="res://Characters/Enemies/Enemy.tscn" type="PackedScene" id=8]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[node name="Alien 01" instance=ExtResource( 8 )]
+
+[node name="Shadow" parent="." index="0"]
+texture = ExtResource( 7 )
+
+[node name="Torso" parent="." index="1"]
+position = Vector2( 0.868743, -46.7734 )
+texture = ExtResource( 6 )
+
+[node name="Head" parent="Torso" index="1"]
+position = Vector2( 1.00217, -20.9115 )
+rotation = 0.0
+texture = ExtResource( 2 )
+offset = Vector2( -0.628415, -45.3316 )
+
+[node name="ArmRight" parent="Torso" index="2"]
+position = Vector2( 13.062, -12.4784 )
+texture = ExtResource( 3 )
+offset = Vector2( 18.2239, -2.1283 )
+
+[node name="EquipmentArmRight" parent="Torso/ArmRight" index="0"]
+position = Vector2( 29.2023, 2.86027 )
+
+[node name="ArmLeft" parent="Torso" index="3"]
+position = Vector2( -16.7615, -12.4784 )
+texture = ExtResource( 4 )
+offset = Vector2( 20.3158, -1.13134 )
+
+[node name="EquipmentArmLeft" parent="Torso/ArmLeft" index="0"]
+position = Vector2( 32.971, 2.86027 )
+
+[node name="LegRight" parent="Torso" index="4"]
+position = Vector2( 7.63957, 20.9601 )
+texture = ExtResource( 5 )
+offset = Vector2( 10.4548, 8.51151 )
+
+[node name="EquipmentFootRight" parent="Torso/LegRight" index="0"]
+position = Vector2( 4.9272, 20.3012 )
+
+[node name="EquipmentLegRight" parent="Torso/LegRight" index="1"]
+position = Vector2( 1.00835, -0.489809 )
+
+[node name="LegLeft" parent="Torso" index="5"]
+position = Vector2( -13.1465, 20.9601 )
+texture = ExtResource( 1 )
+offset = Vector2( -7.60567, 14.5583 )
+
+[node name="EquipmentFootLeft" parent="Torso/LegLeft" index="0"]
+position = Vector2( -4.73682, 19.5657 )
+
+[node name="EquipmentLegLeft" parent="Torso/LegLeft" index="1"]
+position = Vector2( 0.41256, 0.133964 )
+
+[node name="AnimationTree" parent="." index="3"]
+parameters/playback = SubResource( 1 )
+
+[editable path="InteractionManager"]

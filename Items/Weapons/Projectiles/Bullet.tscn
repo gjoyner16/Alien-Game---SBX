@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Items/Weapons/Projectiles/Projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Items/Weapons/Projectiles/sprite_items_projectiles_bullet.png" type="Texture" id=2]
+
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="Bullet" instance=ExtResource( 1 )]
+gravity_scale = 0.0
+damage = 2
+speed = 20
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0.611725, -0.203911 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )

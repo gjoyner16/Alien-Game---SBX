@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Managers/InteractionManager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Environment/Building.gd" type="Script" id=2]
+
+[node name="Building" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="InteractionManager" parent="." instance=ExtResource( 1 )]

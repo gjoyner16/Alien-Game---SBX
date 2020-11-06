@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Items/Weapons/Weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Items/Weapons/sprite_weapon_pistol.png" type="Texture" id=2]
+
+[node name="Pistol" instance=ExtResource( 1 )]
+position = Vector2( 0, -1.13759 )
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 16, 0 )
+texture = ExtResource( 2 )
+
+[node name="FirePosition" parent="Sprite" index="0"]
+position = Vector2( 54.2936, -19.9816 )

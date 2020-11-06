@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Environment/Eras/01 Medieval/01 Medieval.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Environment/Player House/PlayerHouse.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Environment/Main Area/MainArea.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/Menus/CraftingMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/Menus/EquipmentMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Characters/Enemies/Alien 01/Alien 01.tscn" type="PackedScene" id=7]
+
+[node name="World" type="Node2D"]
+pause_mode = 2
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+[node name="Rooms" type="Node2D" parent="."]
+pause_mode = 1
+
+[node name="MainArea" parent="Rooms" instance=ExtResource( 4 )]
+position = Vector2( 776, 456 )
+
+[node name="Camera" parent="Rooms/MainArea" index="0"]
+current = true
+
+[node name="Alien 01" parent="Rooms/MainArea/Objects/Characters" index="0" instance=ExtResource( 7 )]
+
+[node name="InteractionManager" parent="Rooms/MainArea/TransferPoints/Start" index="0"]
+visible = false
+monitoring = false
+monitorable = false
+
+[node name="CollisionPolygon2D" parent="Rooms/MainArea" index="4"]
+polygon = PoolVector2Array( -768, -448, 768, -448, 768, 456, 40, 456, 40, 256, 736, 256, 736, -296, -744, -296, -744, 256, -88, 256, -88, 424, 40, 424, 40, 456, -88, 456, -768, 456 )
+
+[node name="PlayerHouse" parent="Rooms" instance=ExtResource( 3 )]
+position = Vector2( 2136, 296 )
+
+[node name="MainArea" parent="Rooms/PlayerHouse/TransferPoints" index="0"]
+to_room = "MainArea"
+to_point = "MainArea/TransferPoints/PlayerHouse"
+
+[node name="CollisionPolygon2D" parent="Rooms/PlayerHouse" index="4"]
+polygon = PoolVector2Array( -512, -296, 512, -296, 512, 304, 56, 304, 56, 240, 448, 240, 448, -200, -448, -200, -448, 240, 56, 240, 56, 304, -512, 304 )
+
+[node name="Eras" type="Node2D" parent="Rooms"]
+
+[node name="01 Medieval" parent="Rooms/Eras" instance=ExtResource( 2 )]
+position = Vector2( 1024, 1584 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="CraftingMenu" parent="UI" instance=ExtResource( 5 )]
+visible = false
+
+[node name="EquipmentMenu" parent="UI" instance=ExtResource( 6 )]
+visible = false
+
+[editable path="Rooms/MainArea"]
+
+[editable path="Rooms/MainArea/TransferPoints/Start"]
+
+[editable path="Rooms/PlayerHouse"]

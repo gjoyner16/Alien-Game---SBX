@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Environment/Eras/RunTransferPointInteractionManager.gd" type="Script" id=1]
+[ext_resource path="res://Environment/TransferPoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Environment/Eras/RunTransferPoint.gd" type="Script" id=3]
+
+[node name="RunTransferPoint" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+
+[node name="InteractionManager" parent="." index="0"]
+script = ExtResource( 1 )
+
+[editable path="InteractionManager"]

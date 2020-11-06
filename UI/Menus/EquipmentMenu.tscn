@@ -1,0 +1,122 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/Menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/UI/sprite_ui_menu_storage_shed.png" type="Texture" id=2]
+[ext_resource path="res://UI/Game Fonts/font_ui_header.tres" type="DynamicFont" id=3]
+[ext_resource path="res://UI/Game Fonts/font_ui_body.tres" type="DynamicFont" id=5]
+[ext_resource path="res://UI/Menus/EquipmentMenu.gd" type="Script" id=6]
+
+[node name="EquipmentMenu" instance=ExtResource( 1 )]
+script = ExtResource( 6 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="Label" parent="." index="1"]
+margin_left = 336.0
+margin_top = 48.0
+margin_right = 680.0
+margin_bottom = 110.0
+text = "Equipment"
+
+[node name="Equipment" type="TabContainer" parent="." index="2"]
+margin_left = 184.0
+margin_top = 216.0
+margin_right = 528.0
+margin_bottom = 496.0
+custom_fonts/font = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapons" type="ItemList" parent="Equipment" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 77.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/font = ExtResource( 5 )
+
+[node name="Gear" type="ItemList" parent="Equipment" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 77.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/font = ExtResource( 5 )
+
+[node name="Equipped" type="Control" parent="." index="3"]
+margin_left = 528.0
+margin_top = 216.0
+margin_right = 848.0
+margin_bottom = 576.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EquippedLabel" type="Label" parent="Equipped" index="0"]
+margin_right = 320.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Equipped"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EquippedLists" type="Control" parent="Equipped" index="1"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Slot" type="ItemList" parent="Equipped/EquippedLists" index="0"]
+margin_left = 8.0
+margin_top = 48.0
+margin_right = 136.0
+margin_bottom = 296.0
+custom_fonts/font = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="ItemList" parent="Equipped/EquippedLists" index="1"]
+margin_left = 136.0
+margin_top = 48.0
+margin_right = 312.0
+margin_bottom = 296.0
+custom_fonts/font = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="Label" parent="Equipped" index="2"]
+margin_top = 296.0
+margin_right = 320.0
+margin_bottom = 360.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Stats"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EquipButton" type="Button" parent="." index="4"]
+margin_left = 272.0
+margin_top = 504.0
+margin_right = 440.0
+margin_bottom = 569.0
+custom_fonts/font = ExtResource( 3 )
+text = "Equip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="tab_changed" from="Equipment" to="." method="_on_Equipment_tab_changed"]
+[connection signal="item_selected" from="Equipment/Weapons" to="." method="_on_Weapons_item_selected"]
+[connection signal="item_selected" from="Equipment/Gear" to="." method="_on_Gear_item_selected"]
+[connection signal="pressed" from="EquipButton" to="." method="_on_EquipButton_pressed"]

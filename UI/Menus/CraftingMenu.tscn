@@ -1,0 +1,168 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://UI/Menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/UI/sprite_ui_menu_storage_shed.png" type="Texture" id=2]
+[ext_resource path="res://UI/Game Fonts/font_ui_header.tres" type="DynamicFont" id=3]
+[ext_resource path="res://UI/Game Fonts/font_ui_body_20_u.tres" type="DynamicFont" id=4]
+[ext_resource path="res://UI/Game Fonts/font_ui_body.tres" type="DynamicFont" id=5]
+[ext_resource path="res://UI/Menus/CraftingMenu.gd" type="Script" id=6]
+
+[node name="CraftingMenu" instance=ExtResource( 1 )]
+script = ExtResource( 6 )
+good_color = Color( 0, 0.768627, 0.101961, 1 )
+bad_color = Color( 1, 0.243137, 0.243137, 1 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="Label" parent="." index="1"]
+margin_left = 336.0
+margin_top = 48.0
+margin_right = 680.0
+margin_bottom = 110.0
+text = "Workshop"
+
+[node name="Recipes" type="TabContainer" parent="." index="2"]
+margin_left = 184.0
+margin_top = 216.0
+margin_right = 528.0
+margin_bottom = 504.0
+custom_fonts/font = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapons" type="ItemList" parent="Recipes" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 77.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/font = ExtResource( 5 )
+
+[node name="Gear" type="ItemList" parent="Recipes" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 77.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/font = ExtResource( 5 )
+
+[node name="Ingredients" type="Control" parent="." index="3"]
+margin_left = 528.0
+margin_top = 216.0
+margin_right = 848.0
+margin_bottom = 576.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IngredientsLabel" type="Label" parent="Ingredients" index="0"]
+margin_right = 320.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Ingredients"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IngredientsHeaders" type="Control" parent="Ingredients" index="1"]
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 112.0
+
+[node name="Item" type="Label" parent="Ingredients/IngredientsHeaders" index="0"]
+margin_top = 9.0
+margin_right = 144.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Item"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Needed" type="Label" parent="Ingredients/IngredientsHeaders" index="1"]
+margin_left = 144.0
+margin_top = 8.0
+margin_right = 232.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Needed"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Owned" type="Label" parent="Ingredients/IngredientsHeaders" index="2"]
+margin_left = 232.0
+margin_top = 9.0
+margin_right = 320.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Owned"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IngredientsLists" type="Control" parent="Ingredients" index="2"]
+margin_top = 104.0
+margin_right = 320.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="ItemList" parent="Ingredients/IngredientsLists" index="0"]
+margin_right = 144.0
+margin_bottom = 256.0
+custom_fonts/font = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Needed" type="ItemList" parent="Ingredients/IngredientsLists" index="1"]
+margin_left = 144.0
+margin_right = 232.0
+margin_bottom = 256.0
+custom_fonts/font = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Owned" type="ItemList" parent="Ingredients/IngredientsLists" index="2"]
+margin_left = 232.0
+margin_right = 320.0
+margin_bottom = 256.0
+custom_fonts/font = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CraftButton" type="Button" parent="." index="4"]
+margin_left = 272.0
+margin_top = 504.0
+margin_right = 440.0
+margin_bottom = 569.0
+custom_fonts/font = ExtResource( 3 )
+text = "Craft"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="tab_changed" from="Recipes" to="." method="_on_Recipes_tab_changed"]
+[connection signal="item_selected" from="Recipes/Weapons" to="." method="_on_Weapons_item_selected"]
+[connection signal="item_selected" from="Recipes/Gear" to="." method="_on_Gear_item_selected"]
+[connection signal="pressed" from="CraftButton" to="." method="_on_CraftButton_pressed"]

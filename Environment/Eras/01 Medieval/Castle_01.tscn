@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Managers/Camera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Environment/Castle/sprite_building_castle_test_01.png" type="Texture" id=2]
+[ext_resource path="res://Environment/Eras/RunTransferPoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Environment/Room.gd" type="Script" id=8]
+
+[node name="Castle 01" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource( 8 )
+
+[node name="Camera" parent="." instance=ExtResource( 1 )]
+zoom = Vector2( 2, 2 )
+
+[node name="TopLeft" parent="Camera/Limits" index="0"]
+position = Vector2( -1024, -592 )
+
+[node name="BottomRight" parent="Camera/Limits" index="1"]
+position = Vector2( 1032, 608 )
+
+[node name="Floor" type="Sprite" parent="."]
+position = Vector2( 0, 8 )
+z_index = -1000
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 2048, 1200 )
+
+[node name="Objects" type="YSort" parent="."]
+
+[node name="Background" type="Sprite" parent="Objects"]
+z_index = -500
+
+[node name="Foreground" type="Sprite" parent="Objects"]
+z_index = 500
+
+[node name="Items" type="YSort" parent="Objects"]
+
+[node name="Decorations" type="YSort" parent="Objects"]
+
+[node name="Buildings" type="YSort" parent="Objects"]
+
+[node name="Characters" type="YSort" parent="Objects"]
+
+[node name="TransferPoints" type="Node2D" parent="."]
+
+[node name="ExitUp" parent="TransferPoints" instance=ExtResource( 3 )]
+position = Vector2( 24, -376 )
+direction = 1
+
+[node name="ExitDown" parent="TransferPoints" instance=ExtResource( 3 )]
+position = Vector2( 32, 480 )
+direction = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -1024, -592, 1024, -592, 1032, 608, 120, 608, 120, 512, 1000, 512, 1000, -416, -992, -424, -984, 504, -64, 512, -64, 544, 120, 544, 120, 608, -64, 608, -1016, 608 )
+
+[editable path="Camera"]

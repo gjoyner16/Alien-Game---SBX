@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Characters/Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Characters/Player 02/sprite_player_torso.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Characters/Player 02/sprite_player_shadow.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Characters/Player 02/sprite_player_leg_right.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Characters/Player 02/sprite_player_arm_right.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Characters/Player 02/sprite_player_arm_left.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Characters/Player 02/sprite_player_head.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Characters/Player 02/sprite_player_leg_left.png" type="Texture" id=9]
+[ext_resource path="res://Characters/Player/PlayerOverheadPopupManager.gd" type="Script" id=18]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[node name="Player" instance=ExtResource( 1 )]
+collision_layer = 2
+script = ExtResource( 2 )
+
+[node name="Shadow" parent="." index="0"]
+texture = ExtResource( 4 )
+
+[node name="Torso" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="Head" parent="Torso" index="1"]
+position = Vector2( -2.76886, -29.903 )
+texture = ExtResource( 8 )
+
+[node name="ArmRight" parent="Torso" index="2"]
+texture = ExtResource( 6 )
+
+[node name="ArmLeft" parent="Torso" index="3"]
+texture = ExtResource( 7 )
+
+[node name="LegRight" parent="Torso" index="4"]
+texture = ExtResource( 5 )
+
+[node name="LegLeft" parent="Torso" index="5"]
+texture = ExtResource( 9 )
+
+[node name="AnimationTree" parent="." index="3"]
+parameters/playback = SubResource( 1 )
+
+[node name="OverheadPopupManager" parent="." index="6"]
+position = Vector2( 0, -384 )
+script = ExtResource( 18 )
+
+[node name="Stats" parent="." index="7"]
+BASE_ACCELERATION = 500
+BASE_MAX_SPEED = 250
+[connection signal="area_entered" from="InteractionManager" to="OverheadPopupManager" method="_on_InteractionManager_area_entered"]
+[connection signal="area_exited" from="InteractionManager" to="OverheadPopupManager" method="_on_InteractionManager_area_exited"]
+
+[editable path="InteractionManager"]

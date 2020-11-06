@@ -1,0 +1,220 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Managers/InteractionManager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Characters/Character.gd" type="Script" id=2]
+[ext_resource path="res://Characters/Stats.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Managers/OverheadPopupManager.tscn" type="PackedScene" id=17]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Torso/Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -3.24707, -31.3377 ), Vector2( -1.73767, -26.8094 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Run"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Torso/LegRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 9.55847, 38.6074 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Torso/LegLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -12.328, 37.098 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Torso/LegRight:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 59.6927, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Torso/LegLeft:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -62.2603, 0.0 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=7]
+blend_point_0/node = SubResource( 3 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 4 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 5 )
+blend_point_2/pos = Vector2( 0, 1 )
+blend_point_3/node = SubResource( 6 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "Run"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=12]
+blend_point_0/node = SubResource( 8 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 9 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 10 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 11 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=15]
+states/Idle/node = SubResource( 7 )
+states/Idle/position = Vector2( 272, 80 )
+states/Run/node = SubResource( 12 )
+states/Run/position = Vector2( 496, 80 )
+transitions = [ "Idle", "Run", SubResource( 13 ), "Run", "Idle", SubResource( 14 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=16]
+
+[sub_resource type="CapsuleShape2D" id=17]
+radius = 16.1051
+height = 84.7711
+
+[node name="Character" type="KinematicBody2D"]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 1.19751, -5.32855 )
+
+[node name="Torso" type="Sprite" parent="."]
+position = Vector2( 0.698364, -103.116 )
+
+[node name="EquipmentTorso" type="Node2D" parent="Torso"]
+position = Vector2( -1.35562, 14.9118 )
+
+[node name="Head" type="Sprite" parent="Torso"]
+position = Vector2( -2.72487, -29.7711 )
+rotation = 0.0366683
+offset = Vector2( 0.453735, -80.6437 )
+
+[node name="ArmRight" type="Sprite" parent="Torso"]
+position = Vector2( 25.4454, -17.5232 )
+offset = Vector2( 38.4539, 0.407806 )
+
+[node name="EquipmentArmRight" type="Node2D" parent="Torso/ArmRight"]
+position = Vector2( 62.6407, -0.7547 )
+
+[node name="ArmLeft" type="Sprite" parent="Torso"]
+position = Vector2( -27.7986, -14.3023 )
+offset = Vector2( 36.3704, 4.87378 )
+
+[node name="EquipmentArmLeft" type="Node2D" parent="Torso/ArmLeft"]
+position = Vector2( 64.1501, -0.7547 )
+
+[node name="LegRight" type="Sprite" parent="Torso"]
+position = Vector2( 9.55847, 38.6074 )
+offset = Vector2( 7.7998, -2.14279 )
+
+[node name="EquipmentFootRight" type="Node2D" parent="Torso/LegRight"]
+position = Vector2( 11.2534, 50.1247 )
+
+[node name="EquipmentLegRight" type="Node2D" parent="Torso/LegRight"]
+position = Vector2( 0.104614, -1.84543 )
+
+[node name="LegLeft" type="Sprite" parent="Torso"]
+position = Vector2( -12.328, 37.098 )
+offset = Vector2( -10.9329, 15.1452 )
+
+[node name="EquipmentFootLeft" type="Node2D" parent="Torso/LegLeft"]
+position = Vector2( -12.8705, 53.456 )
+
+[node name="EquipmentLegLeft" type="Node2D" parent="Torso/LegLeft"]
+position = Vector2( -3.2024, -0.31791 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Idle = SubResource( 1 )
+anims/Run = SubResource( 2 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 15 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 16 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Run/blend_position = Vector2( 0, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -3.05176e-05 )
+rotation = 1.5708
+shape = SubResource( 17 )
+
+[node name="InteractionManager" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="OverheadPopupManager" parent="." instance=ExtResource( 17 )]
+
+[node name="Stats" parent="." instance=ExtResource( 3 )]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
+[editable path="InteractionManager"]

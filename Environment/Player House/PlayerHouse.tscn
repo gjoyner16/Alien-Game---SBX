@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Environment/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Environment/Player House/sprite_building_player_house_foreground.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Environment/Player House/sprite_building_player_house_background.png" type="Texture" id=3]
+[ext_resource path="res://Environment/Player House/Buildings/Bed.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Environment/Player House/Buildings/Table.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Environment/Player House/Buildings/Chair02.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Environment/Player House/Buildings/Chair01.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Environment/TransferPoint.tscn" type="PackedScene" id=8]
+
+[node name="PlayerHouse" instance=ExtResource( 1 )]
+
+[node name="Background" parent="Objects" index="0"]
+texture = ExtResource( 3 )
+
+[node name="Foreground" parent="Objects" index="1"]
+texture = ExtResource( 2 )
+
+[node name="Bed" parent="Objects/Buildings" index="0" instance=ExtResource( 4 )]
+position = Vector2( 352, -96 )
+
+[node name="Table" parent="Objects/Buildings" index="1" instance=ExtResource( 5 )]
+position = Vector2( -184, -40 )
+
+[node name="Chair01" parent="Objects/Buildings" index="2" instance=ExtResource( 7 )]
+position = Vector2( -96, -120 )
+
+[node name="Chair02" parent="Objects/Buildings" index="3" instance=ExtResource( 6 )]
+position = Vector2( -288, 16 )
+
+[node name="MainArea" parent="TransferPoints" index="0" instance=ExtResource( 8 )]
+position = Vector2( -24, 232 )
+
+[node name="CollisionPolygon2D" parent="." index="4"]
+polygon = PoolVector2Array( -512, -296, 512, -296, 512, 304, 56, 304, 56, 240, 448, 240, 448, -200, -448, -200, -448, 240, -104, 240, -104, 304, -512, 304 )

@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Managers/Camera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Environment/Main Area/sprite_building_main_area_background.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Environment/Main Area/sprite_building_main_area_foreground.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Environment/Main Area/sprite_building_main_area_path.png" type="Texture" id=4]
+[ext_resource path="res://Environment/Main Area/Buildings/House.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Environment/Main Area/Buildings/StorageShed.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/Environment/sprite_environment_tile_dead_grass.png" type="Texture" id=7]
+[ext_resource path="res://Environment/Room.gd" type="Script" id=8]
+[ext_resource path="res://Environment/Main Area/Buildings/AlienShip.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Environment/TransferPoint.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Managers/InteractionManager.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Environment/Main Area/RunStartInteractionManager.gd" type="Script" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 64, 48 )
+
+[node name="MainArea" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource( 8 )
+
+[node name="Camera" parent="." instance=ExtResource( 1 )]
+zoom = Vector2( 1.5, 1.5 )
+
+[node name="TopLeft" parent="Camera/Limits" index="0"]
+position = Vector2( -768, -448 )
+
+[node name="BottomRight" parent="Camera/Limits" index="1"]
+position = Vector2( 768, 448 )
+
+[node name="Floor" type="Sprite" parent="."]
+z_index = -1000
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1540, 900 )
+
+[node name="Objects" type="YSort" parent="."]
+
+[node name="Background" type="Sprite" parent="Objects"]
+z_index = -500
+texture = ExtResource( 2 )
+
+[node name="Foreground" type="Sprite" parent="Objects"]
+z_index = 500
+texture = ExtResource( 3 )
+
+[node name="Items" type="YSort" parent="Objects"]
+
+[node name="Decorations" type="YSort" parent="Objects"]
+
+[node name="Path" type="Sprite" parent="Objects/Decorations"]
+texture = ExtResource( 4 )
+
+[node name="Buildings" type="YSort" parent="Objects"]
+
+[node name="House" parent="Objects/Buildings" instance=ExtResource( 5 )]
+position = Vector2( -496, -160 )
+
+[node name="StorageShed" parent="Objects/Buildings" instance=ExtResource( 6 )]
+position = Vector2( -40, -208 )
+
+[node name="AlienShip" parent="Objects/Buildings" instance=ExtResource( 9 )]
+position = Vector2( 480, -288 )
+
+[node name="Characters" type="YSort" parent="Objects"]
+
+[node name="TransferPoints" type="Node2D" parent="."]
+
+[node name="Start" parent="TransferPoints" instance=ExtResource( 10 )]
+
+[node name="RunStart" parent="TransferPoints" instance=ExtResource( 11 )]
+position = Vector2( -24, 400 )
+script = ExtResource( 12 )
+
+[node name="CollisionShape2D" parent="TransferPoints/RunStart" index="0"]
+position = Vector2( 0, 8 )
+shape = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -768, -448, 768, -448, 768, 456, 40, 456, 40, 256, 736, 256, 736, -296, -744, -296, -744, 256, -88, 256, -88, 440, 40, 440, 40, 456, -88, 456, -768, 456 )
+
+[editable path="Camera"]
+
+[editable path="TransferPoints/RunStart"]
